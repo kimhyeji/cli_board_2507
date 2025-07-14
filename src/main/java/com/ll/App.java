@@ -42,6 +42,21 @@ public class App {
                     Article article = articleList.get(i);
                     System.out.printf("%d / %s / %s\n", article.getId(), article.getSubject(), article.getContent());
                 }
+            } else if (command.startsWith("삭제")) {
+                String[] commandList = command.split("\\?", 2);
+                String[] paramsStr = commandList[1].split("=", 2);
+
+                String value =  paramsStr[1];
+                int idx = Integer.parseInt(value);
+                for (int i = 0; i < articleList.size(); i++) {
+                    if (articleList.get(i).getId() == idx) {
+                        articleList.remove(i);
+                    }
+                }
+
+
+                System.out.printf("%d번 게시물이 삭제되었습니다\n", idx);
+
             }
         }
     }
