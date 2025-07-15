@@ -30,9 +30,9 @@ public class App {
             } else if (request.getActionCode().equals("목록")) {
                articleController.list();
             } else if (request.getActionCode().startsWith("삭제")) {
-                articleController.delete(request.getIdx());
+                articleController.delete(request);
             } else if (request.getActionCode().startsWith("수정")) {
-                articleController.modify(request.getIdx());
+                articleController.modify(request);
             }
         }
     }
