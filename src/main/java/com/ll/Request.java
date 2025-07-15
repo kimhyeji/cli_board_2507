@@ -1,0 +1,24 @@
+package com.ll;
+
+public class Request {
+    private String actionCode;
+    private int idx;
+
+    public Request(String command) {
+        String[] commandList = command.split("\\?", 2);
+
+        actionCode = commandList[0];
+        String[] paramsStr = commandList[1].split("=", 2);
+
+        String value =  paramsStr[1];
+        idx = Integer.parseInt(value);
+    }
+
+    public String getActionCode() {
+        return actionCode;
+    }
+
+    public int getIdx() {
+        return idx;
+    }
+}
