@@ -3,7 +3,6 @@ package com.ll.article;
 import java.util.List;
 
 public class ArticleService {
-
     ArticleRepository articleRepository;
 
     public ArticleService() {
