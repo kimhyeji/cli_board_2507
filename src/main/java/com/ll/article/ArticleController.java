@@ -8,7 +8,7 @@ import java.util.List;
 public class ArticleController {
     ArticleService articleService;
 
-    ArticleController() {
+    public ArticleController() {
         articleService = new ArticleService();
     }
 
@@ -62,7 +62,7 @@ public class ArticleController {
             return;
         }
 
-        Article article = _getFindById(id);
+        Article article = articleService.getFindById(id);
 
         if (article == null) {
             System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
@@ -71,12 +71,12 @@ public class ArticleController {
             System.out.printf("제목(기존) : %s\n", article.getSubject());
             System.out.print("제목 : ");
             String modifySubject = Container.getSc().nextLine();
-            article.setSubject(modifySubject);
 
             System.out.printf("내용(기존) : %s\n", article.getContent());
             System.out.print("내용 : ");
             String modifyContent = Container.getSc().nextLine();
-            article.setContent(modifyContent);
+
+            articleService.modify(article, modifySubject, modifyContent);
 
             System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
         }

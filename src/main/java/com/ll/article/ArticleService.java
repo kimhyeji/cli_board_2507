@@ -32,4 +32,9 @@ public class ArticleService {
     public void remove(Article article) {
         articleList.remove(article);
     }
+
+    public void modify(Article article, String modifySubject, String modifyContent) {
+        article.setSubject(modifySubject);
+        article.setContent(modifyContent);
+    }
 }
