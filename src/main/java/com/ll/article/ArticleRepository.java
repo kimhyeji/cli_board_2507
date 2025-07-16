@@ -11,11 +11,10 @@ public class ArticleRepository {
     int lastId = 1;
 
     public int create(String subject, String content) {
-        Article article = new Article(lastId, subject, content);
-        articleList.add(article);
-        lastId++;
+        String sql = String.format("insert into article set subject='%s', content='%s'", subject, content);
+        int id = Container.getDBConnection().insert(sql);
 
-        return article.getId();
+        return id;
     }
 
     public List<Article> findAll() {
