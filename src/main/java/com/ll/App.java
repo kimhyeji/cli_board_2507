@@ -4,9 +4,6 @@ import com.ll.article.ArticleController;
 import com.ll.db.DBConnection;
 import com.ll.system.SystemController;
 
-import java.util.List;
-import java.util.Map;
-
 public class App {
     ArticleController articleController;
     SystemController systemController;
@@ -17,11 +14,7 @@ public class App {
         DBConnection.DB_USER = "root";
         DBConnection.DB_PASSWORD = "";
 
-        DBConnection DBConnection = new DBConnection();
-        DBConnection.connect();
-
-        List<Map<String, Object>> rs = DBConnection.selectRows("select * from article");
-        System.out.println(rs);
+        Container.getDBConnection().connect();
 
         articleController = new ArticleController();
         systemController = new SystemController();
