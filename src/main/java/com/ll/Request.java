@@ -7,7 +7,6 @@ public class Request {
     private String actionCode;
     private Map<String, String> params = new HashMap<>();
 
-
     public Request(String command) {
         String[] commandList = command.split("\\?", 2);
 
