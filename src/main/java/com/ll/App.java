@@ -2,10 +2,12 @@ package com.ll;
 
 import com.ll.article.ArticleController;
 import com.ll.db.DBConnection;
+import com.ll.member.MemberController;
 import com.ll.system.SystemController;
 
 public class App {
     ArticleController articleController;
+    MemberController memberController;
     SystemController systemController;
 
     App() {
@@ -18,6 +20,7 @@ public class App {
 
         articleController = new ArticleController();
         systemController = new SystemController();
+        memberController = new MemberController();
     }
 
     public void run() {
@@ -41,6 +44,8 @@ public class App {
                 articleController.delete(request);
             } else if (request.getActionCode().startsWith("수정")) {
                 articleController.modify(request);
+            } else if (request.getActionCode().equals("회원가입")) {
+                memberController.join();
             }
         }
     }
