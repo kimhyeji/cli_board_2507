@@ -46,6 +46,8 @@ public class App {
                 articleController.modify(request);
             } else if (request.getActionCode().equals("회원가입")) {
                 memberController.join();
+            } else if (request.getActionCode().equals("로그인")) {
+                memberController.login();
             }
         }
     }
