@@ -2,17 +2,11 @@ package com.ll.member;
 
 import com.ll.Container;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 public class MemberController {
-    List<Member> memberList = new ArrayList<>();
-    int lastMemberId;
-    Member loginedMember = null;
+    MemberService memberService;
 
-    public MemberController() {
-        lastMemberId = 0;
+    public MemberController () {
+        memberService = new MemberService();
     }
 
     public void join () {
@@ -26,7 +20,7 @@ public class MemberController {
             userId = Container.getSc().nextLine().trim();
             boolean isDuplcated = false;
 
-            Member member = _memberFindByUserid(userId);
+            Member member = memberService.memberFindByUserId(userId);
 
             if (member != null) {
                 System.out.println("중복 아이디가 존재합니다.");
@@ -54,15 +48,19 @@ public class MemberController {
             System.out.println("비밀번호가 일치하지 않습니다.");
         }
 
-        lastMemberId++;
-        Member member = new Member(lastMemberId, userId, password, LocalDate.now().toString());
-        memberList.add(member);
+        int memberId = this.memberService.join(userId, password);
+
+        if (memberId == -1) {
+            System.out.println("회원가입에 실패하였습니다.");
+            return;
+        }
 
         System.out.println(userId + "님 가입을 환영합니다.");
+
     }
 
     public void login() {
-        if (loginedMember != null) {
+        if (Container.getLoginedMember() != null) {
             System.out.println("현재 로그인 상태입니다.");
             return;
         }
@@ -74,7 +72,7 @@ public class MemberController {
         System.out.printf("비밀번호 : ");
         String password = Container.getSc().nextLine().trim();
 
-        Member member = this._memberFindByUserid(userId);
+        Member member = this.memberService.memberFindByUserId(userId);
         checkedMember = member;
 
         if (checkedMember == null) {
@@ -85,27 +83,19 @@ public class MemberController {
             return;
         }
 
-        loginedMember = checkedMember;
+        this.memberService.login(checkedMember);
 
         System.out.println(checkedMember.getUserId() + "님 환영합니다.");
     }
 
-    private Member _memberFindByUserid(String userId) {
-        for (Member member : memberList) {
-            if (userId.equals(member.getUserId())) {
-                return member;
-            }
-        }
-        return null;
-    }
-
-    public void logout() {
-        if (loginedMember == null) {
+    public void logout () {
+        if (Container.getLoginedMember() == null) {
             System.out.println("로그인 상태가 아닙니다.");
             return;
         }
 
-        loginedMember = null;
+        this.memberService.logout();
+
         System.out.println("로그아웃 되었습니다.");
     }
 }

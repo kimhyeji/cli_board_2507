@@ -1,12 +1,13 @@
 package com.ll;
 
 import com.ll.db.DBConnection;
-
+import com.ll.member.Member;
 import java.util.Scanner;
 
 public class Container {
     private static Scanner sc;
     private static DBConnection dbConnection;
+    private static Member loginedMember;
 
     public static void init() {
         sc = new Scanner(System.in);
@@ -26,5 +27,13 @@ public class Container {
         }
 
         return dbConnection;
+    }
+
+    public static Member getLoginedMember() {
+        return loginedMember;
+    }
+
+    public static void setLoginedMember(Member member) {
+        loginedMember = member;
     }
 }
