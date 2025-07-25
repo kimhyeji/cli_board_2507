@@ -48,6 +48,8 @@ public class App {
                 memberController.join();
             } else if (request.getActionCode().equals("로그인")) {
                 memberController.login();
+            } else if (request.getActionCode().equals("로그아웃")) {
+                memberController.logout();
             }
         }
     }

@@ -98,4 +98,14 @@ public class MemberController {
         }
         return null;
     }
+
+    public void logout() {
+        if (loginedMember == null) {
+            System.out.println("로그인 상태가 아닙니다.");
+            return;
+        }
+
+        loginedMember = null;
+        System.out.println("로그아웃 되었습니다.");
+    }
 }
