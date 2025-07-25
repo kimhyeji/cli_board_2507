@@ -13,6 +13,11 @@ public class ArticleController {
     }
 
     public void write() {
+        if (Container.getLoginedMember() == null) {
+            System.out.println("게시글은 로그인 후 작성해주세요.");
+            return;
+        }
+
         System.out.print("제목 : ");
         String subject = Container.getSc().nextLine().trim();
         System.out.print("내용 : ");

@@ -15,13 +15,6 @@ public class Member {
         this.regDate = row.get("regDate").toString();
     }
 
-    public Member(int id, String userId, String password, String regDate) {
-        this.id = id;
-        this.userId = userId;
-        this.password = password;
-        this.regDate = regDate;
-    }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
